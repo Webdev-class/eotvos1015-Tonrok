@@ -10,15 +10,46 @@ let customers = [
     {id:9, name:"Ashlie Wozencraft", age:23, address:{city:"Espinosa", street:"78 Pepper Wood Terrace", house:11}, newsLetter: false},
     {id:10, name:"Jonas Tungate", age:83, address:{city:"Padangulaktanding", street:"224 Manley Drive", house:49}, newsLetter: true}
 ]
-function isAddress(address) {    
-    //TODO
+function isAddress(address) {
+    return (typeof(address.city) === 'string' && typeof(address.street) === 'string' && typeof(address.house) === 'number')
 }
 
-function isCustomer(name, age, address, newsLetter) {    
-    //TODO
+function isCustomer(name, age, address, newsLetter) {
+    return (
+        typeof(name) === "string" &&
+        typeof(age) === "number" &&
+        isAddress(address) &&
+        typeof(newsLetter) === "boolean"
+      )
 }
 function modifyCustomer (customer){
-    //TODO
+    let found = false
+    if(isCustomer(customer.name, customer.age, customer.address, customer.newsLetter)){
+        let copyCustomers = [...customers];
+        
+        // sajnos valami gond akadt a git-el, így nem tudtam tesztelni, illetve nem teljesen értem a HTML része a feladatnak mi volt.
+        copyCustomers.forEach((customer, index) => {
+            if (customer.id === id) {
+                let freshCustomer = {
+                    id: customer.id,
+                    name: customer.name,
+                    age: customer.age,
+                    address: customer.address,
+                    newsLetter: customer.newsLetter,
+                };
+                copyCustomers[index] = updatedCustomer;
+                found = true;
+            };
+            
+        });
+
+    }
+    if (found) {
+        return copyCustomers
+      } else {
+        return false
+    }
+    
 }
 
 module.exports = modifyCustomer;
